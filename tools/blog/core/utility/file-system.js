@@ -22,5 +22,4 @@ const writeBlogs = (newBlogs) => {
   fs.writeFileSync(DIST_FILE, JSON.stringify(newBlogs));
 };
 
-
 module.exports = { readSourceFile, getBlogs, writeBlogs };

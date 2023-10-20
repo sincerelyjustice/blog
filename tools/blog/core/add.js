@@ -23,8 +23,14 @@ const addBlog = (fileName) => {
       content: textToHtmlParser(content),
       timestamp: helpers.getTimestamp(),
     };
-    writeBlogs([...getBlogs(), blog]);
-    console.log(`\nBlog '${title}' added.`);
+    const blogs = getBlogs();
+    const matchesTitle = (blog) => blog.title === title;
+    if (blogs.some(matchesTitle)) {
+      console.log(`\nBlog '${title}' already exists`);
+    } else {
+      writeBlogs([...blogs, blog]);
+      console.log(`\nBlog '${title}' added.`);
+    }
     rl.close();
   });
 };
