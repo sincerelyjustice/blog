@@ -1,6 +1,13 @@
 const { pipe } = require('../../lib/function');
-const { addHeadings, addParagraphs, addLists, addLinks } = require('./parsers');
-const { addBlockCode, addInlineCode } = require('./parsers/types/code');
+const {
+  addHeadings,
+  addParagraphs,
+  addLists,
+  addLinks,
+  addEmphasis,
+  addBlockCode,
+  addInlineCode,
+} = require('./parsers');
 const { getPortions, getLines } = require('./utility/portions');
 
 const textToHtmlParser = (text) => {
@@ -15,7 +22,7 @@ const textToHtmlParser = (text) => {
     addBlockCode
   );
   parsedText = getLines(parsedPortions).join('\n');
-  parsedText = pipe([parsedText], addLinks, addInlineCode);
+  parsedText = pipe([parsedText], addLinks, addInlineCode, addEmphasis);
   return parsedText;
 };
 
