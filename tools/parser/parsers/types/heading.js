@@ -1,5 +1,4 @@
 const { transformations } = require('../../transformations');
-const { wrapWithTags } = require('../../utility/tags');
 const { wrapPortion } = require('../../utility/portions');
 
 const addHeadings = (portions) => {

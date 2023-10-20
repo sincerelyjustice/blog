@@ -1,4 +1,4 @@
-const { isEmpty, getWhitespace } = require('../../../../lib/string');
+const { getWhitespace } = require('../../../../lib/string');
 const { getTransformation } = require('../../utility/transformations');
 const { openTag, closeTag } = require('../../utility/tags');
 
@@ -40,11 +40,6 @@ const parsePortion = (portion, transformation) => {
     }
   };
 
-  const cleanupAll = () => {
-    cleanupItem();
-    cleanupLists();
-  };
-
   for (const line of portion) {
     const match = line.match(transformation.regex);
     if (match) {
@@ -72,14 +67,12 @@ const parsePortion = (portion, transformation) => {
       parsedPortion.push(indentTag(openItem, listDepth) + match[2]);
       unclosedListItem = true;
     } else {
-      if (isEmpty(line.trim())) {
-        cleanupAll();
-      }
       parsedPortion.push(line);
     }
   }
 
-  cleanupAll();
+  cleanupItem();
+  cleanupLists();
 
   return parsedPortion;
 };
