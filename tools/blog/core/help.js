@@ -9,7 +9,7 @@ Commands:
 
 Examples:
   blog add ./my-post.txt         Adds a new blog post from my-post.txt
-  blog remove "My Post"          Removes the blog post titled "My Blog Title"
+  blog remove "My Post"          Removes the blog post titled "My Post"
   blog --help                    Prints this help message
 `);
 };

@@ -42,7 +42,8 @@ const getLines = (portions) => {
   const lines = [];
   for (const portion of portions) {
     lines.push(...portion);
-    // for newlines lost above, collapse into one:
+    // for newlines lost in `getPortions`,
+    // collapse into one:
     lines.push('');
   }
   return lines;
