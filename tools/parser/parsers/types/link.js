@@ -1,5 +1,5 @@
 const { globalise } = require('../../../../lib/string');
-const { wrapWithTags } = require('../../utility/tags');
+const { wrapWithTags, selfClosingTag } = require('../../utility/tags');
 const { getTransformation } = require('../../utility/transformations');
 
 const addLinks = (text) => {
@@ -9,4 +9,11 @@ const addLinks = (text) => {
   return text.replace(globalise(transformation.regex), htmlLinkReplacer);
 };
 
-module.exports = { addLinks };
+const addImages = (text) => {
+  const transformation = getTransformation('image');
+  const htmlLinkReplacer = (_, alt, src) =>
+    selfClosingTag(transformation.tag, { src, alt });
+  return text.replace(globalise(transformation.regex), htmlLinkReplacer);
+};
+
+module.exports = { addLinks, addImages };

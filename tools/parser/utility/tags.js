@@ -6,14 +6,21 @@ const wrapWithTags = (text, tagName, props = {}) => {
   return `${prefix}${text}${suffix}`;
 };
 
-const openTag = (name, props = {}) => {
+const halfOpenTag = (name, props = {}) => {
   let tag = `<${name}`;
   if (!isEmpty(props)) {
     tag += ' ' + writeProps(props);
   }
-  tag += `>`;
   return tag;
 };
+
+const openTag = (name, props = {}) => {
+  return halfOpenTag(name, props) + '>';
+};
+
+const selfClosingTag = (name, props = {}) => {
+  return halfOpenTag(name, props) + '/>'
+}
 
 const closeTag = (name) => {
   return `</${name}>`;
@@ -27,4 +34,4 @@ const writeProps = (props) => {
   return list.join(' ');
 };
 
-module.exports = { wrapWithTags, openTag, closeTag };
+module.exports = { wrapWithTags, openTag, selfClosingTag, closeTag };

@@ -5,9 +5,15 @@ const makeLinkTransformations = () => {
     {
       name: 'link',
       tag: 'a',
-      regex: /\[(.*?)\]\((.*?)\)/,
+      regex: /(?<!\!)\[(.*?)\]\((.*?)\)/,
       delimiter: getWhitespace(1),
     },
+    {
+      name: 'image',
+      tag: 'img',
+      regex: /\!\[(.*?)\]\((.*?)\)/,
+      delimiter: getWhitespace(1),
+    }
   ];
 };
 
