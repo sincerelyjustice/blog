@@ -1,4 +1,4 @@
-const { negator } = require('../../../lib/function/negator');
+const { negator } = require('../../../lib/function');
 const { getBlogs, writeBlogs } = require('./utility/file-system');
 
 const removeBlog = (title) => {
