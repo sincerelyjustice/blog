@@ -20,9 +20,20 @@ const parsePortion = (portion, transformation) => {
   let listDepth = 0;
   let unclosedListItem = false;
 
+  const getLineDepth = (leadingSpaces) => {
+    const indentation = leadingSpaces ? leadingSpaces.length : 0;
+    return 1 + indentation / transformation.indentation;
+  };
+
   const indentTag = (tag, multiplier) => {
     return getWhitespace(multiplier * transformation.indentation) + tag;
   };
+
+  const addItem = (content) => {
+    const openItem = openTag(transformation.itemTag);
+    parsedPortion.push(indentTag(openItem, listDepth) + content);
+    unclosedListItem = true;
+  }
 
   const cleanupItem = () => {
     if (unclosedListItem) {
@@ -32,8 +43,16 @@ const parsePortion = (portion, transformation) => {
     }
   };
 
-  const cleanupLists = () => {
-    while (listDepth > 0) {
+  const openLists = (upToDepth) => {
+    while (listDepth < upToDepth) {
+      const openList = openTag(transformation.tag);
+      parsedPortion.push(indentTag(openList, listDepth));
+      listDepth++;
+    }
+  };
+
+  const closeLists = (downToDepth) => {
+    while (listDepth > downToDepth) {
       const closeList = closeTag(transformation.tag);
       parsedPortion.push(indentTag(closeList, listDepth - 1));
       listDepth--;
@@ -43,36 +62,20 @@ const parsePortion = (portion, transformation) => {
   for (const line of portion) {
     const match = line.match(transformation.regex);
     if (match) {
+      const spaces = match[1];
+      const content = match[2];
+      const lineDepth = getLineDepth(spaces);
       cleanupItem();
-
-      const indentation = match[1] ? match[1].length : 0;
-      const lineDepth = 1 + indentation / transformation.indentation;
-
-      // open the necessary new lists
-      while (lineDepth > listDepth) {
-        const openList = openTag(transformation.tag);
-        parsedPortion.push(indentTag(openList, listDepth));
-        listDepth++;
-      }
-
-      // close the necessary open lists
-      while (lineDepth < listDepth) {
-        const closeList = closeTag(transformation.tag);
-        parsedPortion.push(indentTag(closeList, listDepth - 1));
-        listDepth--;
-      }
-
-      // add new item
-      const openItem = openTag(transformation.itemTag);
-      parsedPortion.push(indentTag(openItem, listDepth) + match[2]);
-      unclosedListItem = true;
+      openLists(lineDepth);
+      closeLists(lineDepth);
+      addItem(content);
     } else {
       parsedPortion.push(line);
     }
   }
 
   cleanupItem();
-  cleanupLists();
+  closeLists(0);
 
   return parsedPortion;
 };
