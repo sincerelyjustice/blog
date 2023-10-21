@@ -8,7 +8,7 @@ const {
   getBlogsIndexPath,
   getSrcImagesPath,
   getDistImagesPath,
-} = require('../config/selectors');
+} = require('../../../config');
 
 const ROOT_DIR = path.join(__dirname, '..', '..', '..', '..');
 const SRC_DIR = path.join(ROOT_DIR, getSrcRoot());
@@ -45,7 +45,7 @@ const writeBlogs = (newBlogs) => {
 
 const copyImage = (name) => {
   const imageFile = path.join(IMAGES_SRC, name);
-  console.log(imageFile)
+  console.log(imageFile);
   if (!fs.existsSync(imageFile)) {
     console.log(
       `\nYour blog makes reference to an image '${name}', which could not be found.`

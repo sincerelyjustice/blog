@@ -7,6 +7,7 @@ const removeBlog = (title) => {
   const matchesTitle = (blog) => blog.title === title;
   if (!blogs.some(matchesTitle)) {
     console.log(`\nBlog '${title}' was not found.`);
+    process.exit(1);
   } else {
     writeBlogs(blogs.filter(negator(matchesTitle)));
     cleanupImages(title);

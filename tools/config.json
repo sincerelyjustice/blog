@@ -2,6 +2,7 @@
   "src": {
     "paths": {
       "root": "src",
+      "app": ["app"],
       "blogs": ["blogs"],
       "images": ["blogs", "images"]
     }

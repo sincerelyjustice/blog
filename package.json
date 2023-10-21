@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "blog": "node tools/blog/script.js"
+    "blog": "node tools/blog/script.js",
+    "build": "node tools/build/index.js"
   }
 }

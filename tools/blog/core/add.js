@@ -1,6 +1,6 @@
-const { forwardSlashes } = require('../../../lib/path');
+const { forwardSlashes } = require('../../../lib/file-system');
 const { textToHtmlParser, getImageReferences } = require('../../parser');
-const { getDistImagesPath } = require('./config/selectors');
+const { getDistImagesPath } = require('../../config');
 const {
   readSourceFile,
   writeBlogs,
