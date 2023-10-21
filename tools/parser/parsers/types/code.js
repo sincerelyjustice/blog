@@ -1,4 +1,4 @@
-const { globalise } = require('../../../../lib/string');
+const { globalRegex } = require('../../../../lib/string');
 const { wrapPortion } = require('../../utility/portions');
 const { wrapWithTags } = require('../../utility/tags');
 const { getTransformation } = require('../../utility/transformations');
@@ -7,7 +7,7 @@ const addInlineCode = (text) => {
   const transformation = getTransformation('code.inline');
   const htmlCodeReplacer = (_, codeText) =>
     wrapWithTags(codeText, transformation.tag);
-  return text.replace(globalise(transformation.regex), htmlCodeReplacer);
+  return text.replace(globalRegex(transformation.regex), htmlCodeReplacer);
 };
 
 const addBlockCode = (portions) => {

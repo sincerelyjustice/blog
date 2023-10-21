@@ -1,4 +1,4 @@
-const { globalise } = require('../../../../lib/string');
+const { globalRegex } = require('../../../../lib/string');
 const { wrapWithTags } = require('../../utility/tags');
 const { getTransformation } = require('../../utility/transformations');
 
@@ -10,7 +10,7 @@ const addEmphasis = (text) => {
     const htmlLinkReplacer = (_, emphaticText) =>
       wrapWithTags(emphaticText, transformation.tag);
     parsedText = parsedText.replace(
-      globalise(transformation.regex),
+      globalRegex(transformation.regex),
       htmlLinkReplacer
     );
   }

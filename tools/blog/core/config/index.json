@@ -1,0 +1,17 @@
+{
+  "src": {
+    "paths": {
+      "root": "src",
+      "blogs": ["blogs"],
+      "images": ["blogs", "images"]
+    }
+  },
+  "dist": {
+    "paths": {
+      "root": "dist",
+      "blogs": ["blogs"],
+      "images": ["blogs", "images"],
+      "index": ["blogs", "index.json"]
+    }
+  }
+}

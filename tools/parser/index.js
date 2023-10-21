@@ -1,6 +1,4 @@
-const path = require('path');
 const { pipe } = require('../../lib/function');
-const { globalise } = require('../../lib/string');
 const {
   addHeadings,
   addParagraphs,
@@ -12,10 +10,10 @@ const {
   addImages,
 } = require('./parsers');
 const { getPortions, getLines } = require('./utility/portions');
-const { getTransformation } = require('./utility/transformations');
+const { getImageReferences } = require('./utility/images');
 
-const textToHtmlParser = (text) => {
-  let parsedText;
+const textToHtmlParser = (text, options = {}) => {
+  const { imageDirectory = 'images' } = options;
   const lines = text.split('\n');
   const portions = getPortions(lines);
   const parsedPortions = pipe(
@@ -25,22 +23,16 @@ const textToHtmlParser = (text) => {
     addLists,
     addBlockCode
   );
+  let parsedText;
   parsedText = getLines(parsedPortions).join('\n');
   parsedText = pipe(
-    [parsedText],
-    addLinks,
+    [parsedText, imageDirectory],
     addImages,
+    addLinks,
     addInlineCode,
     addEmphasis
   );
   return parsedText;
-};
-
-const getImageReferences = (text) => {
-  const transformation = getTransformation('image');
-  const matches = Array.from(text.matchAll(globalise(transformation.regex)));
-  const imagePaths = matches.map((match) => match[2]);
-  return imagePaths.map((imagePath) => path.basename(imagePath));
 };
 
 module.exports = { textToHtmlParser, getImageReferences };

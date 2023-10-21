@@ -1,4 +1,6 @@
+const { forwardSlashes } = require('../../../lib/path');
 const { textToHtmlParser, getImageReferences } = require('../../parser');
+const { getDistImagesPath } = require('./config/selectors');
 const {
   readSourceFile,
   writeBlogs,
@@ -27,7 +29,9 @@ const addBlog = (fileName) => {
       const imageRefs = getImageReferences(content);
       const blog = {
         title,
-        content: textToHtmlParser(content),
+        content: textToHtmlParser(content, {
+          imageDirectory: forwardSlashes(getDistImagesPath()),
+        }),
         timestamp: helpers.getTimestamp(),
       };
       imageRefs.forEach((ref) => addImage(ref, title));
