@@ -1,11 +1,16 @@
 let blogs = [];
 
-const Loading = () => {
-  return `<p>Loading...</p>`;
+const show = (html) => {
+  const content = document.getElementById('content');
+  content.innerHTML = html;
 };
 
 const getBlogLinkId = (blog) => {
   return `${blog.title}-LINK`;
+};
+
+const Loading = () => {
+  return `<p>Loading...</p>`;
 };
 
 const Home = ({ blogs }) => {
@@ -28,11 +33,6 @@ const Blog = ({ blog }) => {
     <hr/>
     <article>${blog.content}</article>
   `;
-};
-
-const show = (html) => {
-  const content = document.getElementById('content');
-  content.innerHTML = html;
 };
 
 const addHomeClickListener = () => {
