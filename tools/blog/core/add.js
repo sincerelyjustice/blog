@@ -17,28 +17,34 @@ const helpers = {
   getTimestamp: () => Date.now(),
 };
 
+const addBlogImages = (blogText, blogTitle) => {
+  const imageRefs = getImageReferences(blogText);
+  imageRefs.forEach((ref) => addImage(ref, blogTitle));
+};
+
 const addBlog = (fileName) => {
-  const content = readSourceFile(fileName);
-  const rl = helpers.getReadlineInterface();
-  rl.question('Enter a title: ', (title) => {
-    const blogs = getBlogs();
+  const sourceText = readSourceFile(fileName);
+  const readline = helpers.getReadlineInterface();
+  const currentBlogs = getBlogs();
+  readline.question('Enter a title: ', (title) => {
     const matchesTitle = (blog) => blog.title === title;
-    if (blogs.some(matchesTitle)) {
+    if (currentBlogs.some(matchesTitle)) {
       console.log(`\nBlog '${title}' already exists`);
     } else {
-      const imageRefs = getImageReferences(content);
+      const content = textToHtmlParser(sourceText, {
+        imageDirectory: forwardSlashes(getDistImagesPath()),
+      });
+      const timestamp = helpers.getTimestamp();
       const blog = {
         title,
-        content: textToHtmlParser(content, {
-          imageDirectory: forwardSlashes(getDistImagesPath()),
-        }),
-        timestamp: helpers.getTimestamp(),
+        content,
+        timestamp,
       };
-      imageRefs.forEach((ref) => addImage(ref, title));
-      writeBlogs([...blogs, blog]);
+      writeBlogs([...currentBlogs, blog]);
+      addBlogImages(sourceText, title);
       console.log(`\nBlog '${title}' added.`);
     }
-    rl.close();
+    readline.close();
   });
 };
 

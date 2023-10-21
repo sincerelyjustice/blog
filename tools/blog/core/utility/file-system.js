@@ -45,7 +45,6 @@ const writeBlogs = (newBlogs) => {
 
 const copyImage = (name) => {
   const imageFile = path.join(IMAGES_SRC, name);
-  console.log(imageFile);
   if (!fs.existsSync(imageFile)) {
     console.log(
       `\nYour blog makes reference to an image '${name}', which could not be found.`
