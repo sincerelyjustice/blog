@@ -2,8 +2,29 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  font-size: large;
+  background: #e0e0e0;
 }
 
 #title {
   text-align: center;
+  color: #191970;
+}
+
+#title:hover {
+  text-decoration: underline;
+}
+
+#container {
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#blogs-list {
+  margin-left: 0;
+  padding-left: 0;
 }
