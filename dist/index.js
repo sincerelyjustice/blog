@@ -10,7 +10,7 @@ const getBlogLinkId = (blog) => {
 
 const Home = ({ blogs }) => {
   return `
-  <ul>
+  <ul id="blogs-list">
       ${blogs
         .map(
           (blog) =>
