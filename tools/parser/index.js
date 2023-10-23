@@ -11,11 +11,12 @@ const {
 } = require('./parsers');
 const { getPortions, getLines } = require('./utility/portions');
 const { getImageReferences } = require('./utility/images');
+const { cleanupEscapes } = require('./utility/escape');
 
 const textToHtmlParser = (text, options = {}) => {
   const { imageDirectory = 'images' } = options;
-  const lines = text.split('\n');
-  const portions = getPortions(lines);
+  let parsedLines = text.split('\n');
+  const portions = getPortions(parsedLines);
   const parsedPortions = pipe(
     [portions],
     addParagraphs,
@@ -23,16 +24,18 @@ const textToHtmlParser = (text, options = {}) => {
     addLists,
     addBlockCode
   );
-  let parsedText;
-  parsedText = getLines(parsedPortions).join('\n');
-  parsedText = pipe(
-    [parsedText, imageDirectory],
-    addImages,
-    addLinks,
-    addInlineCode,
-    addEmphasis
+  parsedLines = getLines(parsedPortions);
+  parsedLines = parsedLines.map((line) =>
+    pipe(
+      [line, imageDirectory],
+      addImages,
+      addLinks,
+      addInlineCode,
+      addEmphasis,
+      cleanupEscapes,
+    )
   );
-  return parsedText;
+  return parsedLines.join('\n');
 };
 
 module.exports = { textToHtmlParser, getImageReferences };

@@ -22,9 +22,12 @@ const getPortions = (lines) => {
   return portions;
 };
 
-const wrapPortion = (portion, tag, options = {}) => {
-  const { newFirstLine } = options;
-  const firstLine = newFirstLine || portion[0];
+const replaceFirstLine = (portion, newFirstLine) => {
+  return [newFirstLine, ...portion.slice(1)];
+};
+
+const wrapPortion = (portion, tag) => {
+  const firstLine = portion[0];
   const portionSize = portion.length;
   if (portionSize === 1) {
     return [wrapWithTags(firstLine, tag)];
@@ -49,4 +52,4 @@ const getLines = (portions) => {
   return lines;
 };
 
-module.exports = { getPortions, wrapPortion, getLines };
+module.exports = { getPortions, replaceFirstLine, wrapPortion, getLines };

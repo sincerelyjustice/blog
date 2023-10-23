@@ -1,3 +1,4 @@
+const { range } = require('../../../../lib/array');
 const { getWhitespace } = require('../../../../lib/string');
 
 const makeListTransformations = () => {
@@ -9,6 +10,7 @@ const makeListTransformations = () => {
     tag: 'ol',
     itemTag: 'li',
     regex: getRegex('[0-9]+\.'),
+    specialChars: [...range(9), '.'],
     delimiter: '\n\n',
     indentation,
   };
@@ -17,6 +19,7 @@ const makeListTransformations = () => {
     tag: 'ul',
     itemTag: 'li',
     regex: getRegex('-'),
+    specialChars: ['-'],
     delimiter: '\n\n',
     indentation,
   };

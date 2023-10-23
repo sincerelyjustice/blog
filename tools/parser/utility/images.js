@@ -1,10 +1,9 @@
-const { globalRegex } = require("../../../lib/string");
-const { getTransformation } = require("./transformations");
+const { getTransformation } = require('./transformations');
+const { unescapedMatchAll } = require('./escape');
 
 const getImageLinkMatches = (text) => {
   const transformation = getTransformation('image');
-  const matches = text.matchAll(globalRegex(transformation.regex));
-  return Array.from(matches);
+  return unescapedMatchAll(text, transformation.regex);
 };
 
 const getImageReferences = (text) => {

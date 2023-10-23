@@ -5,6 +5,7 @@ const makeCodeTransformations = () => {
     name: 'code.inline',
     tag: 'code',
     regex: /`(.*?)`/,
+    specialChars: ['`'],
     delimiter: getWhitespace(1),
   };
   const blockTransformation = {
@@ -12,6 +13,7 @@ const makeCodeTransformations = () => {
     tag: 'pre',
     subTag: inlineTransformation.tag,
     regex: /^\$\$\$ (.+)$/,
+    specialChars: ['$'],
     delimiter: '\n\n',
   };
   return [inlineTransformation, blockTransformation];

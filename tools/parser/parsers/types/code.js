@@ -1,5 +1,6 @@
 const { globalRegex } = require('../../../../lib/string');
-const { wrapPortion } = require('../../utility/portions');
+const { escapeInlineCharacters, unescapedReplace } = require('../../utility/escape');
+const { wrapPortion, replaceFirstLine } = require('../../utility/portions');
 const { wrapWithTags } = require('../../utility/tags');
 const { getTransformation } = require('../../utility/transformations');
 
@@ -7,7 +8,11 @@ const addInlineCode = (text) => {
   const transformation = getTransformation('code.inline');
   const htmlCodeReplacer = (_, codeText) =>
     wrapWithTags(codeText, transformation.tag);
-  return text.replace(globalRegex(transformation.regex), htmlCodeReplacer);
+  return unescapedReplace(
+    text,
+    globalRegex(transformation.regex),
+    htmlCodeReplacer
+  );
 };
 
 const addBlockCode = (portions) => {
@@ -16,11 +21,11 @@ const addBlockCode = (portions) => {
   for (const portion of portions) {
     const match = portion[0].match(transformation.regex);
     if (match) {
-      const subTagged = wrapPortion(portion, transformation.subTag, {
-        newFirstLine: match[1],
-      });
-      const tagged = wrapPortion(subTagged, transformation.tag);
-      parsedPortions.push(tagged);
+      let parsedPortion = replaceFirstLine(portion, match[1]);
+      parsedPortion = parsedPortion.map(escapeInlineCharacters);
+      parsedPortion = wrapPortion(parsedPortion, transformation.subTag);
+      parsedPortion = wrapPortion(parsedPortion, transformation.tag);
+      parsedPortions.push(parsedPortion);
     } else {
       parsedPortions.push(portion);
     }

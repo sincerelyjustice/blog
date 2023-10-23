@@ -1,5 +1,5 @@
 const { transformations } = require('../../transformations');
-const { wrapPortion } = require('../../utility/portions');
+const { wrapPortion, replaceFirstLine } = require('../../utility/portions');
 
 const addHeadings = (portions) => {
   const parsedPortions = [];
@@ -10,9 +10,9 @@ const addHeadings = (portions) => {
     for (const transformation of headingTransformations) {
       const match = portion[0].match(transformation.regex);
       if (match) {
-        parsedPortions.push(
-          wrapPortion(portion, transformation.tag, { newFirstLine: match[1] })
-        );
+        let parsedPortion = replaceFirstLine(portion, match[1]);
+        parsedPortion = wrapPortion(parsedPortion, transformation.tag);
+        parsedPortions.push(parsedPortion);
         continue loop;
       }
     }

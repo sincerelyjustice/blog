@@ -9,6 +9,7 @@ const makeHeadingTransformations = () => {
       name: `heading.${headingNum}`,
       tag: `h${headingNum}`,
       regex: getRegex(headingNum),
+      leadingChar: ['#'],
       delimiter: '\n\n',
     };
     headingTransformations.push(transformation);

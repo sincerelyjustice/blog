@@ -1,7 +1,7 @@
 const { matchesAny } = require('../../../../lib/string');
 const { transformations } = require('../../transformations');
 const { getTransformation } = require('../../utility/transformations');
-const { isLineTransformation } = require('../../utility/transformations');
+const { isPortionTransformation } = require('../../utility/transformations');
 const { wrapPortion } = require('../../utility/portions');
 
 const addParagraphs = (portions) => {
@@ -25,7 +25,7 @@ const getSpecialLineRegexps = () => {
   const regexes = [];
   for (const transformation of transformations) {
     const isSpecialLineTransformation =
-      isLineTransformation(transformation) &&
+      isPortionTransformation(transformation) &&
       !isParagraphTransformation(transformation);
     if (isSpecialLineTransformation) {
       regexes.push(transformation.regex);

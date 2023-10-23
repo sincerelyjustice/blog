@@ -33,7 +33,7 @@ const parsePortion = (portion, transformation) => {
     const openItem = openTag(transformation.itemTag);
     parsedPortion.push(indentTag(openItem, listDepth) + content);
     unclosedListItem = true;
-  }
+  };
 
   const cleanupItem = () => {
     if (unclosedListItem) {

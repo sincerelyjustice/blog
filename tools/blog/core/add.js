@@ -30,6 +30,7 @@ const addBlog = (fileName) => {
     const matchesTitle = (blog) => blog.title === title;
     if (currentBlogs.some(matchesTitle)) {
       console.log(`\nBlog '${title}' already exists`);
+      process.exit(1);
     } else {
       const content = textToHtmlParser(sourceText, {
         imageDirectory: forwardSlashes(getDistImagesPath()),
