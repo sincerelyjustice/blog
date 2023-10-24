@@ -1,4 +1,4 @@
-const { arrayToPath } = require('../lib/file-system');
+const { arrayToPath } = require('../../../lib/file-system');
 
 const config = require('./config.json');
 

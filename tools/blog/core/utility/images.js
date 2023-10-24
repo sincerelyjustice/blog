@@ -1,5 +1,6 @@
 const { negator, equalityFactory } = require('../../../../lib/function');
 const { copyJson } = require('../../../../lib/object');
+const { isEscaped } = require('../../../../lib/string');
 const {
   writeImageMetadata,
   writeImagesMetadata,
@@ -7,6 +8,14 @@ const {
   copyImage,
   getImagesMetadata,
 } = require('./file-system');
+
+const getImageReferences = (text) => {
+  const imageLinkRegex = /\!\[(.*?)\]\((.*?)\)/g;
+  const linkMatches = Array.from(text.matchAll(imageLinkRegex));
+  const isUnescapedMatch = (match) => !isEscaped(text, match.index);
+  const getImageReference = (match) => match[2];
+  return linkMatches.filter(isUnescapedMatch).map(getImageReference);
+};
 
 const addImage = (name, blogTitle) => {
   copyImage(name);
@@ -50,4 +59,4 @@ const cleanupImages = (titleOfRemovedBlog) => {
   writeImagesMetadata(updatedMetadata);
 };
 
-module.exports = { addImage, cleanupImages };
+module.exports = { getImageReferences, addImage, cleanupImages };
