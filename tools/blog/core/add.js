@@ -4,7 +4,7 @@ const {
   writeBlogs,
   getBlogs,
 } = require('./utility/file-system');
-const { addImage, getImageReferences } = require('./utility/images');
+const { addImage, getImageReferences, setImagePaths } = require('./utility/images');
 const {
   initReadlineInterface,
   readlineQuestion,
@@ -18,7 +18,7 @@ const addBlogImages = (blogText, blogTitle) => {
 };
 
 const addBlog = async (fileName) => {
-  const content = readSourceFile(fileName);
+  const sourceText = readSourceFile(fileName);
   const currentBlogs = getBlogs();
   initReadlineInterface();
 
@@ -69,6 +69,7 @@ const addBlog = async (fileName) => {
   const path = await queryPath();
   const tags = csvToArray(await queryTags());
   const timestamp = Date.now();
+  const content = setImagePaths(sourceText);
   const blog = {
     title,
     path,
@@ -77,7 +78,7 @@ const addBlog = async (fileName) => {
     content,
   };
   writeBlogs([...currentBlogs, blog]);
-  addBlogImages(content, title);
+  addBlogImages(sourceText, title);
   console.log(`\nBlog '${title}' added.`);
   closeReadlineInterface();
 };
