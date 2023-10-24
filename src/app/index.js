@@ -28,7 +28,7 @@ const Home = ({ blogs }) => {
 
 const Blog = ({ blog }) => {
   return `
-    <h1>${blog.title}</h1>
+    <h1 id="blog-title">${blog.title}</h1>
     <small>${new Date(blog.timestamp).toLocaleDateString('en-GB')}</small>
     <hr/>
     <article>${blog.content}</article>
