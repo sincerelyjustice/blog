@@ -1,0 +1,10 @@
+@import url('../../styles/theme.module.css');
+
+.blog {
+  padding: 0.5rem 2rem;
+  border: 1px solid #E0E0E0;
+}
+
+.blogTitle {
+  color: var(--dark-green);
+}

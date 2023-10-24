@@ -1,5 +1,9 @@
+const path = require('path');
 const { negator, equalityFactory } = require('../../../../lib/function');
 const { copyJson } = require('../../../../lib/object');
+const { isEscaped, replaceIfNotEscaped } = require('../../../../lib/string');
+const { forwardSlashes } = require('../../../../lib/file-system');
+const { getDistImagesPath } = require('../../config/selectors');
 const {
   writeImageMetadata,
   writeImagesMetadata,
@@ -7,6 +11,23 @@ const {
   copyImage,
   getImagesMetadata,
 } = require('./file-system');
+
+const IMG_LINK_REGEX = /\!\[(.*?)\]\((.*?)\)/g;
+
+const getImageReferences = (text) => {
+  const linkMatches = Array.from(text.matchAll(IMG_LINK_REGEX));
+  const isUnescapedMatch = (match) => !isEscaped(text, match.index);
+  const getImageReference = (match) => match[2];
+  return linkMatches.filter(isUnescapedMatch).map(getImageReference);
+};
+
+const setImagePaths = (text) => {
+  const replacer = (_, alt, src) => {
+    const imgPath = path.join(getDistImagesPath(), src);
+    return `![${alt}](/${forwardSlashes(imgPath)})`;
+  };
+  return replaceIfNotEscaped(text, IMG_LINK_REGEX, replacer);
+};
 
 const addImage = (name, blogTitle) => {
   copyImage(name);
@@ -50,4 +71,4 @@ const cleanupImages = (titleOfRemovedBlog) => {
   writeImagesMetadata(updatedMetadata);
 };
 
-module.exports = { addImage, cleanupImages };
+module.exports = { getImageReferences, setImagePaths, addImage, cleanupImages };
