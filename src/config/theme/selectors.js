@@ -2,6 +2,7 @@ import { joinUrlPaths } from 'lib/web/url';
 import theme from './theme.json';
 
 export const getSiteTitle = () => theme.title;
+export const getContactEmail = () => theme.contactEmail;
 
 export const getHomePath = () => theme.pages.home.path;
 export const getBlogBasePath = () => theme.pages.blog.basePath;
