@@ -1,9 +1,5 @@
-const path = require('path');
 const { negator, equalityFactory } = require('../../../../lib/function');
 const { copyJson } = require('../../../../lib/object');
-const { isEscaped, replaceIfNotEscaped } = require('../../../../lib/string');
-const { forwardSlashes } = require('../../../../lib/file-system');
-const { getDistImagesPath } = require('../../config/selectors');
 const {
   writeImageMetadata,
   writeImagesMetadata,
@@ -11,22 +7,11 @@ const {
   copyImage,
   getImagesMetadata,
 } = require('./file-system');
+const { getImageReferences } = require('./parse');
 
-const IMG_LINK_REGEX = /\!\[(.*?)\]\((.*?)\)/g;
-
-const getImageReferences = (text) => {
-  const linkMatches = Array.from(text.matchAll(IMG_LINK_REGEX));
-  const isUnescapedMatch = (match) => !isEscaped(text, match.index);
-  const getImageReference = (match) => match[2];
-  return linkMatches.filter(isUnescapedMatch).map(getImageReference);
-};
-
-const setImagePaths = (text) => {
-  const replacer = (_, alt, src) => {
-    const imgPath = path.join(getDistImagesPath(), src);
-    return `![${alt}](/${forwardSlashes(imgPath)})`;
-  };
-  return replaceIfNotEscaped(text, IMG_LINK_REGEX, replacer);
+const addBlogImages = (blogText, blogTitle) => {
+  const imageRefs = getImageReferences(blogText);
+  imageRefs.forEach((ref) => addImage(ref, blogTitle));
 };
 
 const addImage = (name, blogTitle) => {
@@ -39,9 +24,13 @@ const addImageMetada = (name, blogTitle) => {
   const currentData = imagesMetadata[name];
   let updatedData;
   if (currentData) {
-    updatedData = {
-      featuredIn: [...currentData.featuredIn, blogTitle],
-    };
+    if (currentData.featuredIn.includes(blogTitle)) {
+      updatedData = currentData;
+    } else {
+      updatedData = {
+        featuredIn: [...currentData.featuredIn, blogTitle],
+      };
+    }
   } else {
     updatedData = {
       featuredIn: [blogTitle],
@@ -71,4 +60,4 @@ const cleanupImages = (titleOfRemovedBlog) => {
   writeImagesMetadata(updatedMetadata);
 };
 
-module.exports = { getImageReferences, setImagePaths, addImage, cleanupImages };
+module.exports = { addBlogImages, cleanupImages };

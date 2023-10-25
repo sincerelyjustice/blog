@@ -1,12 +1,12 @@
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useBlogsContext } from '../../context/blogs';
-import { useEffect } from 'react';
 import {
   getBlogPathParamName,
   getNotFoundPath,
 } from '../../../config/theme/selectors';
 import Markdown from '../../components/markdown';
-
+import BlogDate from './components/blog-date';
 import styles from './index.module.css';
 
 const BlogPage = () => {
@@ -26,7 +26,7 @@ const BlogPage = () => {
     <div className={styles.blogContainer}>
       <article className={styles.blog}>
         <h1 className={styles.blogTitle}>{blog.title}</h1>
-        <small>{new Date(blog.timestamp).toLocaleDateString('en-GB')}</small>
+        <BlogDate blog={blog} />
         <hr />
         <main>
           <Markdown>{blog.content}</Markdown>

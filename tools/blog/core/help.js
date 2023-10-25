@@ -4,6 +4,7 @@ Usage: blog <command> [options]
 
 Commands:
   add <path-to-file.txt>         Add a new blog post
+  edit <blog-title>              Edit a blog
   remove <blog-title>            Remove a blog post by its title
   -h, --help                     Print this help message
 

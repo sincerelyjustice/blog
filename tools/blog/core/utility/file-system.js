@@ -8,7 +8,7 @@ const {
   getBlogsIndexPath,
   getSrcImagesPath,
   getDistImagesPath,
-} = require('../../config/selectors');
+} = require('../config/selectors');
 
 const ROOT_DIR = path.join(__dirname, '..', '..', '..', '..');
 const SRC_DIR = path.join(ROOT_DIR, getSrcRoot());

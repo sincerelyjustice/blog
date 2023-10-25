@@ -1,10 +1,11 @@
-const { csvToArray, isEmpty } = require('../../../lib/string');
+const { csvToArray, isEmptyString } = require('../../../lib/string');
 const {
   readSourceFile,
   writeBlogs,
   getBlogs,
 } = require('./utility/file-system');
-const { addImage, getImageReferences, setImagePaths } = require('./utility/images');
+const { addBlogImages } = require('./utility/images');
+const { makeContent } = require('./utility/parse');
 const {
   initReadlineInterface,
   readlineQuestion,
@@ -12,19 +13,14 @@ const {
   closeReadlineInterface,
 } = require('./utility/readline');
 
-const addBlogImages = (blogText, blogTitle) => {
-  const imageRefs = getImageReferences(blogText);
-  imageRefs.forEach((ref) => addImage(ref, blogTitle));
-};
 
 const addBlog = async (fileName) => {
   const sourceText = readSourceFile(fileName);
   const currentBlogs = getBlogs();
-  initReadlineInterface();
 
   const queryTitle = async () => {
     const titleAccepter = (title) => {
-      if (isEmpty(title)) {
+      if (isEmptyString(title)) {
         return false;
       }
       const blogAlreadyHasTitle = (blog) => blog.title === title;
@@ -43,7 +39,7 @@ const addBlog = async (fileName) => {
 
   const queryPath = async () => {
     const pathAccepter = (path) => {
-      if (isEmpty(path)) {
+      if (isEmptyString(path)) {
         return false;
       }
       const blogAlreadyHasPath = (blog) => blog.path === path;
@@ -65,22 +61,23 @@ const addBlog = async (fileName) => {
     return tags;
   };
 
+  initReadlineInterface();
   const title = await queryTitle();
   const path = await queryPath();
-  const tags = csvToArray(await queryTags());
-  const timestamp = Date.now();
-  const content = setImagePaths(sourceText);
+  const tags = await queryTags();
+  closeReadlineInterface();
+
   const blog = {
     title,
     path,
-    tags,
-    timestamp,
-    content,
+    tags: csvToArray(tags),
+    content: makeContent(sourceText),
+    timestamp: Date.now(),
   };
+
   writeBlogs([...currentBlogs, blog]);
   addBlogImages(sourceText, title);
   console.log(`\nBlog '${title}' added.`);
-  closeReadlineInterface();
 };
 
 module.exports = { addBlog };

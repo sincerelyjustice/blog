@@ -1,6 +1,7 @@
 const { addBlog } = require('./core/add');
-const { help } = require('./core/help');
+const { editBlog } = require('./core/edit');
 const { removeBlog } = require('./core/remove');
+const { help } = require('./core/help');
 
 const [command, argument] = process.argv.slice(2);
 
@@ -22,6 +23,10 @@ switch (command) {
   case 'add':
     expectArgument();
     addBlog(argument);
+    break;
+  case 'edit':
+    expectArgument();
+    editBlog(argument);
     break;
   case 'remove':
     expectArgument();

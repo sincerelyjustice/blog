@@ -1,5 +1,5 @@
 const { negator } = require('../../../../lib/function');
-const { isEmpty } = require('../../../../lib/string');
+const { isEmptyString } = require('../../../../lib/string');
 
 let readline;
 
@@ -20,7 +20,7 @@ const readlineQuestion = (prompt) => {
 
 const persistentReadlineQuestion = async (
   prompt,
-  accepter = negator(isEmpty)
+  accepter = negator(isEmptyString)
 ) => {
   let acceptableAnswer;
   while (!acceptableAnswer) {
