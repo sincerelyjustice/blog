@@ -8,6 +8,11 @@
 
 .pageContainer {
   width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--dark-white);
 }
 
 @media (max-width: 1000px) {

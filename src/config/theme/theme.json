@@ -15,6 +15,6 @@
   "messages": {
     "loading": "Loading...",
     "blogsError": "Oops. Something went wrong when fetching the blogs.",
-    "404": "We couldn't find the resource you were looking for."
+    "404": "Oops. We could not find the resource you were looking for."
   }
 }

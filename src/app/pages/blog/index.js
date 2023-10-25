@@ -23,14 +23,16 @@ const BlogPage = () => {
   }, [blog, navigate]);
 
   return blog ? (
-    <article className={styles.blog}>
-      <h1 className={styles.blogTitle}>{blog.title}</h1>
-      <small>{new Date(blog.timestamp).toLocaleDateString('en-GB')}</small>
-      <hr />
-      <main>
-        <Markdown>{blog.content}</Markdown>
-      </main>
-    </article>
+    <div className={styles.blogContainer}>
+      <article className={styles.blog}>
+        <h1 className={styles.blogTitle}>{blog.title}</h1>
+        <small>{new Date(blog.timestamp).toLocaleDateString('en-GB')}</small>
+        <hr />
+        <main>
+          <Markdown>{blog.content}</Markdown>
+        </main>
+      </article>
+    </div>
   ) : null;
 };
 

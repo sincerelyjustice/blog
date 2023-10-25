@@ -15,16 +15,25 @@ const helpers = {
       {...props}
     />
   ),
+  getCustomLinks: ({ className, ...props }) => (
+    <a className={gatherClasses(className, styles.link)} {...props} />
+  ),
 };
 
 const Markdown = ({ children }) => {
-  const { getCustomCodeBlock, getCustomCode, getCustomBlockQuote } = helpers;
+  const {
+    getCustomCodeBlock,
+    getCustomCode,
+    getCustomBlockQuote,
+    getCustomLinks,
+  } = helpers;
   return (
     <ReactMarkdown
       components={{
         pre: getCustomCodeBlock,
         code: getCustomCode,
         blockquote: getCustomBlockQuote,
+        a: getCustomLinks,
       }}
       remarkPlugins={[remarkGfm]}
     >

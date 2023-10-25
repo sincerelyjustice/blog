@@ -1,8 +1,11 @@
 @import url('../../styles/theme.module.css');
 
+.blogContainer {
+  width: 100%;
+}
+
 .blog {
   padding: 0.5rem 2rem;
-  border: 1px solid #E0E0E0;
 }
 
 .blogTitle {

@@ -1,22 +1,39 @@
-.listContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@import url('../../styles/theme.module.css');
+
+.homeContainer {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 1.5rem 2rem;
 }
 
-.blogsList {
+.selectGroup {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.selectGroup strong {
+  color: var(--dark-green);
+}
+
+.blogsGroup {
+  margin-top: 1rem;
+}
+
+.blogsGroup strong {
+  color: var(--dark-green);
+  grid-column: auto;
+}
+
+.blogsGroup ul {
   display: flex;
   flex-direction: column;
-  margin-left: 0;
-  padding-left: 0;
   gap: 0.5rem
 }
 
-.blogsList a {
-  color: #01ab01;
-  font-size: larger;
+.blogsGroup a {
+  color: var(--orange);
 }
 
-.blogsList a:hover {
-  color: #165d16;
+.blogsGroup a:hover {
+  color: var(--dark-orange);
 }

@@ -1,8 +1,15 @@
+@import url('../../styles/theme.module.css');
+
 .blockquote {
+  margin-left: 0;
   padding-left: 1rem;
-  border-left: 2px solid;  
+  border-left: 2px solid var(--dark-orange);
 }
 
-.codeBlock {
-  border-radius: 25%;
+.link {
+  color: var(--orange);
+}
+
+.link:hover {
+  color: var(--dark-orange);
 }
