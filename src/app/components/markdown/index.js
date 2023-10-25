@@ -1,6 +1,6 @@
-import { gatherClasses } from 'lib/web/css';
 import remarkGfm from 'remark-gfm';
 import ReactMarkdown from 'react-markdown';
+import { gatherClasses } from '@lib/web/css';
 import MarkdownCode from './markdown-code';
 import styles from './index.module.css';
 

@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { addPlaceholderPathParams } from 'lib/web/url';
+import { addPlaceholderPathParams } from '@lib/web/url';
 import {
   getBlogBasePath,
   getBlogPathParamName,
@@ -26,7 +26,7 @@ const App = () => {
             <Route
               path={addPlaceholderPathParams(
                 getBlogBasePath(),
-                getBlogPathParamName()
+                getBlogPathParamName(),
               )}
               element={<BlogPage />}
             />

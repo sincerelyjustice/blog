@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { copyJson } = require('../../../../lib/object');
+const { copyJson } = require('../../../../@lib/object');
 const {
   getSrcRoot,
   getDistRoot,
@@ -39,7 +39,7 @@ const writeBlogs = (newBlogs) => {
     JSON.stringify({
       ...index,
       blogs: newBlogs,
-    })
+    }),
   );
 };
 
@@ -47,7 +47,7 @@ const copyImage = (name) => {
   const imageFile = path.join(IMAGES_SRC, name);
   if (!fs.existsSync(imageFile)) {
     console.log(
-      `\nYour blog makes reference to an image '${name}', which could not be found.`
+      `\nYour blog makes reference to an image '${name}', which could not be found.`,
     );
     process.exit(1);
   }

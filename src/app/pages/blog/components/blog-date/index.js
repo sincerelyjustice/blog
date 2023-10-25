@@ -1,4 +1,4 @@
-import { getCalendarDate } from 'lib/date';
+import { getCalendarDate } from '@lib/date';
 import styles from './index.module.css';
 
 const BlogDate = ({ blog }) => {

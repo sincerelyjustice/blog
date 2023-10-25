@@ -9,5 +9,5 @@ root.render(
     <BlogsContextProvider>
       <App />
     </BlogsContextProvider>
-  </Router>
+  </Router>,
 );

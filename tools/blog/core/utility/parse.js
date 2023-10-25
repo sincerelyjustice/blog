@@ -1,6 +1,6 @@
 const path = require('path');
-const { isEscaped, replaceIfNotEscaped } = require('../../../../lib/string');
-const { forwardSlashes } = require('../../../../lib/file-system');
+const { isEscaped, replaceIfNotEscaped } = require('../../../../@lib/string');
+const { forwardSlashes } = require('../../../../@lib/file-system');
 const { getDistImagesPath } = require('../config/selectors');
 
 const IMG_LINK_REGEX = /\!\[(.*?)\]\((.*?)\)/g;

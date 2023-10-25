@@ -1,5 +1,5 @@
-const { negator, equalityFactory } = require('../../../../lib/function');
-const { copyJson } = require('../../../../lib/object');
+const { negator, equalityFactory } = require('../../../../@lib/function');
+const { copyJson } = require('../../../../@lib/object');
 const {
   writeImageMetadata,
   writeImagesMetadata,
@@ -51,7 +51,7 @@ const cleanupImages = (titleOfRemovedBlog) => {
       } else {
         updatedMetadata[image] = {
           featuredIn: featuredIn.filter(
-            negator(equalityFactory(titleOfRemovedBlog))
+            negator(equalityFactory(titleOfRemovedBlog)),
           ),
         };
       }

@@ -1,0 +1,46 @@
+{
+  "root": true,
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:import/recommended"
+  ],
+  "settings": {
+    "react": { "version": "detect" },
+    "import/resolver": {
+      "webpack": {
+        "config": "./webpack.config.js"
+      }
+    }
+  },
+  "env": { "es6": true, "browser": true, "node": true },
+  "rules": {
+    "no-console": "warn",
+    "prettier/prettier": ["error", {}, { "usePrettierrc": true }],
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", ["parent", "sibling", "index"]],
+        "pathGroups": [
+          {
+            "pattern": "@lib/**",
+            "group": "external",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": []
+      }
+    ],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react"]
+}

@@ -1,4 +1,4 @@
-const { csvToArray, isEmptyString } = require('../../../lib/string');
+const { csvToArray, isEmptyString } = require('../../../@lib/string');
 const {
   readSourceFile,
   writeBlogs,
@@ -12,7 +12,6 @@ const {
   persistentReadlineQuestion,
   closeReadlineInterface,
 } = require('./utility/readline');
-
 
 const addBlog = async (fileName) => {
   const sourceText = readSourceFile(fileName);
@@ -32,7 +31,7 @@ const addBlog = async (fileName) => {
     };
     const title = await persistentReadlineQuestion(
       'Enter a title: ',
-      titleAccepter
+      titleAccepter,
     );
     return title;
   };
@@ -51,7 +50,7 @@ const addBlog = async (fileName) => {
     };
     const path = await persistentReadlineQuestion(
       'Enter a url path: ',
-      pathAccepter
+      pathAccepter,
     );
     return path;
   };

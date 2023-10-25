@@ -1,5 +1,5 @@
-const { negator } = require('../../../lib/function');
-const { isEmptyString } = require('../../../lib/string');
+const { negator } = require('../../../@lib/function');
+const { isEmptyString } = require('../../../@lib/string');
 const {
   readSourceFile,
   writeBlogs,
@@ -27,7 +27,7 @@ const editBlog = async (title) => {
     const sourceAccepter = (src) => !isEmptyString(src);
     const sourceFile = await persistentReadlineQuestion(
       'Enter the name of a source file for your edits: ',
-      sourceAccepter
+      sourceAccepter,
     );
     return sourceFile;
   };

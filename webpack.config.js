@@ -11,7 +11,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      lib: path.join(__dirname, 'lib'),
+      '@lib': path.join(__dirname, 'lib'),
     },
   },
   module: {

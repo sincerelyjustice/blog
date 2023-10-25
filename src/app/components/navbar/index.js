@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { getEmailUrl } from '@lib/web/url';
 import {
   getContactEmail,
   getHomePath,
@@ -6,7 +7,6 @@ import {
 } from '../../../config/theme/selectors';
 import EmailIcon from '../../../assets/icons/email';
 import styles from './index.module.css';
-import { getEmailUrl } from 'lib/web/url';
 
 const NavBar = () => {
   return (

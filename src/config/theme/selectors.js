@@ -1,4 +1,4 @@
-import { joinUrlPaths } from 'lib/web/url';
+import { joinUrlPaths } from '@lib/web/url';
 import theme from './theme.json';
 
 export const getSiteTitle = () => theme.title;

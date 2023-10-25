@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { capitalize } from 'lib/string';
-import { getSelectedValue } from 'lib/web/html';
+import { capitalize } from '@lib/string';
+import { getSelectedValue } from '@lib/web/html';
 import { getBlogPath } from '../../../config/theme/selectors';
 import { useBlogsContext } from '../../context/blogs';
 import { getAllTags } from '../../utility/blogs';
@@ -36,7 +36,9 @@ const HomePage = () => {
         <select onChange={handleTagSelection}>
           <option>-- Choose a category --</option>
           {tags.map((tag) => (
-            <option value={tag} key={tag}>{capitalize(tag)}</option>
+            <option value={tag} key={tag}>
+              {capitalize(tag)}
+            </option>
           ))}
         </select>
       </label>

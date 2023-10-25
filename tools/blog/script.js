@@ -13,7 +13,7 @@ if (!command) {
 const expectArgument = () => {
   if (!argument) {
     console.log(
-      'Expected an argument. Use "blog -h" or "blog --help" for assistance.'
+      'Expected an argument. Use "blog -h" or "blog --help" for assistance.',
     );
     process.exit(1);
   }
@@ -38,6 +38,6 @@ switch (command) {
     break;
   default:
     console.log(
-      'Invalid command. Use "blog -h" or "blog --help" for assistance.'
+      'Invalid command. Use "blog -h" or "blog --help" for assistance.',
     );
 }
