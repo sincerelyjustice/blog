@@ -1,4 +1,4 @@
-const { negator } = require('../../../@lib/function');
+const { negator } = require('../../../lib/function');
 const { getBlogs, writeBlogs } = require('./utility/file-system');
 const { cleanupImages } = require('./utility/images');
 

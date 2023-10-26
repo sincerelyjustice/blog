@@ -1,5 +1,5 @@
-const { negator, equalityFactory } = require('../../../../@lib/function');
-const { copyJson } = require('../../../../@lib/object');
+const { negator, equalityFactory } = require('../../../../lib/function');
+const { copyJson } = require('../../../../lib/object');
 const {
   writeImageMetadata,
   writeImagesMetadata,

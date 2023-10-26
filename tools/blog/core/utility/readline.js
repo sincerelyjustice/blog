@@ -1,5 +1,5 @@
-const { negator } = require('../../../../@lib/function');
-const { isEmptyString } = require('../../../../@lib/string');
+const { negator } = require('../../../../lib/function');
+const { isEmptyString } = require('../../../../lib/string');
 
 let readline;
 

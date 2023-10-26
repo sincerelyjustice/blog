@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { copyJson } = require('../../../../@lib/object');
+const { copyJson } = require('../../../../lib/object');
 const {
   getSrcRoot,
   getDistRoot,
