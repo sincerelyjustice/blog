@@ -7,3 +7,9 @@ export const getAllTags = (blogs) => {
   }
   return removeDuplicates(allTags);
 };
+
+export const sortByRecency = (blogs) => {
+  return blogs
+    .slice()
+    .sort((b1, b2) => new Date(b2.timestamp) - new Date(b1.timestamp));
+};

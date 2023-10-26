@@ -4,7 +4,7 @@ import { capitalize } from '@lib/string';
 import { getSelectedValue } from '@lib/web/html';
 import { getBlogPath } from '../../../config/theme/selectors';
 import { useBlogsContext } from '../../context/blogs';
-import { getAllTags } from '../../utility/blogs';
+import { getAllTags, sortByRecency } from '../../utility/blogs';
 import styles from './index.module.css';
 
 const HomePage = () => {
@@ -45,7 +45,7 @@ const HomePage = () => {
       <div className={styles.blogsGroup}>
         <strong>Blogs:</strong>
         <ul>
-          {getMatchingBlogs().map((blog) => (
+          {sortByRecency(getMatchingBlogs()).map((blog) => (
             <li key={blog.title}>
               <Link to={getBlogPath(blog.path)}>{blog.title}</Link>
             </li>

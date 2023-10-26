@@ -3,6 +3,7 @@
 .homeContainer {
   display: inline-flex;
   flex-direction: column;
+  min-height: 75vh;
   padding: 1.5rem 2rem;
 }
 
