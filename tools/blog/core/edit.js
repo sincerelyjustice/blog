@@ -1,5 +1,4 @@
 const { negator } = require('../../../lib/function');
-const { isEmptyString } = require('../../../lib/string');
 const {
   readSourceFile,
   writeBlogs,
