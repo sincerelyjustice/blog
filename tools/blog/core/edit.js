@@ -24,10 +24,8 @@ const editBlog = async (title) => {
   }
 
   const querySourceFile = async () => {
-    const sourceAccepter = (src) => !isEmptyString(src);
     const sourceFile = await persistentReadlineQuestion(
       'Enter the name of a source file for your edits: ',
-      sourceAccepter,
     );
     return sourceFile;
   };
