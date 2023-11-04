@@ -23,14 +23,12 @@ const addImageMetada = (name, blogTitle) => {
   const imagesMetadata = getImagesMetadata();
   const currentData = imagesMetadata[name];
   let updatedData;
-  if (currentData) {
-    if (currentData.featuredIn.includes(blogTitle)) {
-      updatedData = currentData;
-    } else {
-      updatedData = {
-        featuredIn: [...currentData.featuredIn, blogTitle],
-      };
-    }
+  if (currentData?.featuredIn.includes(blogTitle)) {
+    updatedData = currentData;
+  } else if (currentData) {
+    updatedData = {
+      featuredIn: [...currentData.featuredIn, blogTitle],
+    };
   } else {
     updatedData = {
       featuredIn: [blogTitle],
@@ -47,13 +45,11 @@ const cleanupImages = (titleOfRemovedBlog) => {
     if (featuredIn.includes(titleOfRemovedBlog)) {
       if (featuredIn.length === 1) {
         removeImage(image);
-        updatedMetadata[image] = undefined;
+        delete updatedMetadata[image];
       } else {
-        updatedMetadata[image] = {
-          featuredIn: featuredIn.filter(
-            negator(equalityFactory(titleOfRemovedBlog)),
-          ),
-        };
+        updatedMetadata[image].featuredIn = featuredIn.filter(
+          negator(equalityFactory(titleOfRemovedBlog)),
+        );
       }
     }
   }

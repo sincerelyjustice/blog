@@ -22,15 +22,10 @@ const editBlog = async (title) => {
     process.exit(1);
   }
 
-  const querySourceFile = async () => {
-    const sourceFile = await persistentReadlineQuestion(
-      'Enter the name of a source file for your edits: ',
-    );
-    return sourceFile;
-  };
-
   initReadlineInterface();
-  const sourceFile = await querySourceFile();
+  const sourceFile = await persistentReadlineQuestion(
+    'Enter the name of a source file for your edits: ',
+  );
   closeReadlineInterface();
 
   const sourceText = readSourceFile(sourceFile);

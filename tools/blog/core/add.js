@@ -17,7 +17,7 @@ const addBlog = async (fileName) => {
   const sourceText = readSourceFile(fileName);
   const currentBlogs = getBlogs();
 
-  const queryTitle = async () => {
+  const queryTitle = () => {
     const titleAccepter = (title) => {
       if (isEmptyString(title)) {
         return false;
@@ -29,14 +29,10 @@ const addBlog = async (fileName) => {
       }
       return true;
     };
-    const title = await persistentReadlineQuestion(
-      'Enter a title: ',
-      titleAccepter,
-    );
-    return title;
+    return persistentReadlineQuestion('Enter a title: ', titleAccepter);
   };
 
-  const queryPath = async () => {
+  const queryPath = () => {
     const pathAccepter = (path) => {
       if (isEmptyString(path)) {
         return false;
@@ -48,17 +44,10 @@ const addBlog = async (fileName) => {
       }
       return true;
     };
-    const path = await persistentReadlineQuestion(
-      'Enter a url path: ',
-      pathAccepter,
-    );
-    return path;
+    return persistentReadlineQuestion('Enter a url path: ', pathAccepter);
   };
 
-  const queryTags = async () => {
-    const tags = await readlineQuestion('Enter any blog tags (as csv): ');
-    return tags;
-  };
+  const queryTags = () => readlineQuestion('Enter any blog tags (as csv): ');
 
   initReadlineInterface();
   const title = await queryTitle();
