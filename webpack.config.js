@@ -1,17 +1,30 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const getPathFromRoot = (to) => path.join(__dirname, to);
+
+const SRC_DIR = getPathFromRoot('src');
+const DIST_DIR = getPathFromRoot('dist');
+const LIB_DIR = getPathFromRoot('lib');
+const PUBLIC_DIR = getPathFromRoot('public');
+
+const cssInjectionLoader =
+  process.env.NODE_ENV === 'production'
+    ? MiniCssExtractPlugin.loader
+    : 'style-loader';
 
 module.exports = {
-  entry: './src/index.js',
+  entry: path.join(SRC_DIR, 'index.js'),
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: DIST_DIR,
     filename: 'index.js',
     publicPath: '/',
   },
   resolve: {
     alias: {
-      '@lib': path.join(__dirname, 'lib'),
+      '@lib': LIB_DIR,
     },
   },
   module: {
@@ -26,9 +39,7 @@ module.exports = {
       {
         test: /\.module\.css$/,
         use: [
-          process.env.NODE_ENV === 'production'
-            ? MiniCssExtractPlugin.loader
-            : 'style-loader',
+          cssInjectionLoader,
           {
             loader: 'css-loader',
             options: {
@@ -43,29 +54,26 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /\.module\.css$/,
-        use: [
-          process.env.NODE_ENV === 'production'
-            ? MiniCssExtractPlugin.loader
-            : 'style-loader',
-          ,
-          'css-loader',
-        ],
+        use: [cssInjectionLoader, 'css-loader'],
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html',
-      favicon: './public/icons/favicon.ico',
+      template: path.join(PUBLIC_DIR, 'index.html'),
+      favicon: path.join(PUBLIC_DIR, 'icons', 'favicon.ico'),
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
+    new CopyWebpackPlugin({
+      patterns: [{ from: path.join(PUBLIC_DIR, 'blogs'), to: 'blogs' }],
+    }),
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist'),
+      directory: DIST_DIR,
       watch: true,
     },
     historyApiFallback: true,

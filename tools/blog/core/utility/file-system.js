@@ -3,21 +3,21 @@ const path = require('path');
 const { copyJson } = require('../../../../lib/object');
 const {
   getSrcRoot,
-  getDistRoot,
+  getPublicRoot,
   getSrcBlogsPath,
   getBlogsIndexPath,
   getSrcImagesPath,
-  getDistImagesPath,
+  getPublicImagesPath,
 } = require('../config/selectors');
 
 const ROOT_DIR = path.join(__dirname, '..', '..', '..', '..');
 const SRC_DIR = path.join(ROOT_DIR, getSrcRoot());
-const DIST_DIR = path.join(ROOT_DIR, getDistRoot());
+const PUBLIC_DIR = path.join(ROOT_DIR, getPublicRoot());
 
 const BLOGS_SRC = path.join(SRC_DIR, getSrcBlogsPath());
-const BLOGS_INDEX = path.join(DIST_DIR, getBlogsIndexPath());
+const BLOGS_INDEX = path.join(PUBLIC_DIR, getBlogsIndexPath());
 const IMAGES_SRC = path.join(SRC_DIR, getSrcImagesPath());
-const IMAGES_DIST = path.join(DIST_DIR, getDistImagesPath());
+const IMAGES_PUBLIC = path.join(PUBLIC_DIR, getPublicImagesPath());
 
 const getBlogsIndex = () => JSON.parse(fs.readFileSync(BLOGS_INDEX, 'utf-8'));
 const getBlogs = () => getBlogsIndex().blogs;
@@ -51,8 +51,8 @@ const copyImage = (name) => {
     );
     process.exit(1);
   }
-  const distImageFile = path.join(IMAGES_DIST, name);
-  fs.copyFileSync(imageFile, distImageFile);
+  const publicImageFile = path.join(IMAGES_PUBLIC, name);
+  fs.copyFileSync(imageFile, publicImageFile);
 };
 
 const writeImageMetadata = (name, data) => {
@@ -68,7 +68,7 @@ const writeImagesMetadata = (data) => {
 };
 
 const removeImage = (name) => {
-  const imageFile = path.join(IMAGES_DIST, name);
+  const imageFile = path.join(IMAGES_PUBLIC, name);
   fs.unlinkSync(imageFile);
 };
 

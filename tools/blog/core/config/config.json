@@ -7,9 +7,9 @@
       "images": ["blogs", "images"]
     }
   },
-  "dist": {
+  "public": {
     "paths": {
-      "root": "dist",
+      "root": "public",
       "blogs": ["blogs"],
       "images": ["blogs", "images"],
       "index": ["blogs", "index.json"]
