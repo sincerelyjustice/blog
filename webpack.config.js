@@ -3,10 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const getPathFromRoot = (to) => path.join(__dirname, to);
-const SRC_DIR = getPathFromRoot('src');
-const DIST_DIR = getPathFromRoot('dist');
-const PUBLIC_DIR = getPathFromRoot('public');
+const SRC_DIR = path.resolve('src');
+const DIST_DIR = path.resolve('dist');
+const PUBLIC_DIR = path.resolve('public');
 
 const cssInjectionLoader =
   process.env.NODE_ENV === 'production'
