@@ -4,10 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const getPathFromRoot = (to) => path.join(__dirname, to);
-
 const SRC_DIR = getPathFromRoot('src');
 const DIST_DIR = getPathFromRoot('dist');
-const LIB_DIR = getPathFromRoot('lib');
 const PUBLIC_DIR = getPathFromRoot('public');
 
 const cssInjectionLoader =
@@ -21,11 +19,6 @@ module.exports = {
     path: DIST_DIR,
     filename: 'index.js',
     publicPath: '/',
-  },
-  resolve: {
-    alias: {
-      '@lib': LIB_DIR,
-    },
   },
   module: {
     rules: [

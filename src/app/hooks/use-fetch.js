@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { retryPromise, withTimeout } from '@lib/promise';
+import { retryPromise, withTimeout } from 'js-toolkit/promise';
 
 const useFetch = () => {
   const [data, setData] = useState(null);

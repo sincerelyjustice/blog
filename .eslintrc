@@ -20,15 +20,7 @@
     "import/order": [
       "error",
       {
-        "groups": ["builtin", "external", ["parent", "sibling", "index"]],
-        "pathGroups": [
-          {
-            "pattern": "@lib/**",
-            "group": "external",
-            "position": "after"
-          }
-        ],
-        "pathGroupsExcludedImportTypes": []
+        "groups": ["builtin", "external", ["parent", "sibling", "index"]]
       }
     ],
     "react/jsx-uses-react": "off",

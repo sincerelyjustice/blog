@@ -1,4 +1,4 @@
-const { negator } = require('../../../lib/function');
+const { negator } = require('js-toolkit/function');
 const {
   readSourceFile,
   writeBlogs,

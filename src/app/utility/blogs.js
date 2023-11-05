@@ -1,4 +1,4 @@
-import { removeDuplicates } from '@lib/array';
+import { removeDuplicates } from 'js-toolkit/array';
 
 export const getAllTags = (blogs) => {
   const allTags = [];

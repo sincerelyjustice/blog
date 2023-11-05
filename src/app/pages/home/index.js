@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { capitalize } from '@lib/string';
-import { getSelectedValue } from '@lib/web/html';
+import { capitalize } from 'js-toolkit/string';
+import { getSelectedValue } from 'js-toolkit/web';
 import { getBlogPath } from '../../../config/theme/selectors';
 import { useBlogsContext } from '../../context/blogs';
 import { getAllTags, sortByRecency } from '../../utility/blogs';

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { getEmailUrl } from '@lib/web/url';
+import { getEmailUrl } from 'js-toolkit/web';
 import {
   getContactEmail,
   getHomePath,

@@ -1,5 +1,5 @@
-const { negator } = require('../../../../lib/function');
-const { isEmptyString } = require('../../../../lib/string');
+const { negator } = require('js-toolkit/function');
+const { isEmptyString } = require('js-toolkit/string');
 
 let readline;
 

@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { addPlaceholderPathParams } from '@lib/web/url';
+import { addPlaceholderPathParams } from 'js-toolkit/web';
 import {
   getBlogBasePath,
   getBlogPathParamName,

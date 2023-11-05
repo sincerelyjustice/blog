@@ -1,4 +1,4 @@
-const { csvToArray, isEmptyString } = require('../../../lib/string');
+const { csvToArray, isEmptyString } = require('js-toolkit/string');
 const {
   readSourceFile,
   writeBlogs,
