@@ -1,3 +1,9 @@
+:root {
+  --page-width-lg: 50%;
+  --page-width-md: 60%;
+  --page-width-sm: 70%;
+}
+
 .layout {
   display: flex;
   flex-direction: column;
@@ -7,7 +13,7 @@
 }
 
 .pageContainer {
-  width: 60%;
+  width: var(--page-width-lg);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,12 +25,12 @@
 
 @media (max-width: 1000px) {
   .pageContainer {
-    width: 70%;
+    width: var(--page-width-md);
   }
 }
 
 @media (max-width: 750px) {
   .pageContainer {
-    width: 80%;
+    width: var(--page-width-sm);
   }
 }

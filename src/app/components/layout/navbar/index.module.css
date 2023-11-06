@@ -1,7 +1,21 @@
+@import url('../index.module.css');
+
 .navBar {
-  width: 60%;
+  width: var(--page-width-lg);
   display: grid;
   grid-template-columns: 1fr auto 1fr;
+}
+
+@media (max-width: 1000px) {
+  .navBar {
+    width: var(--page-width-md);
+  }
+}
+
+@media (max-width: 750px) {
+  .navBar {
+    width: var(--page-width-sm);
+  }
 }
 
 .homeLink {

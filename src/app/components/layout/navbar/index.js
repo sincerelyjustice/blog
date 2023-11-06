@@ -4,8 +4,8 @@ import {
   getContactEmail,
   getHomePath,
   getSiteTitle,
-} from '../../../config/theme/selectors';
-import EmailIcon from '../../../assets/icons/email';
+} from '../../../../config/theme/selectors';
+import EmailIcon from '../../../../assets/icons/email';
 import styles from './index.module.css';
 
 const NavBar = () => {
