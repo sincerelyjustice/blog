@@ -3678,7 +3678,7 @@ jest-worker@^27.4.5:
 
 js-toolkit@sincerelyjustice/js-toolkit#production:
   version "1.0.0"
-  resolved "https://codeload.github.com/sincerelyjustice/js-toolkit/tar.gz/bc8d704a174b1b6652416e790165d14bfcc8093d"
+  resolved "https://codeload.github.com/sincerelyjustice/js-toolkit/tar.gz/368b7c42867622869f9853a0429da245e8c788a4"
 
 js-yaml@^4.1.0:
   version "4.1.0"

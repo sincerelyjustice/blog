@@ -1,4 +1,5 @@
-const { negator } = require('js-toolkit/function');
+const { propertyMatcher } = require('js-toolkit/function');
+const { replaceElements } = require('js-toolkit/array');
 const {
   readSourceFile,
   writeBlogs,
@@ -10,34 +11,76 @@ const {
   initReadlineInterface,
   persistentReadlineQuestion,
   closeReadlineInterface,
+  readlineQuestion,
 } = require('./utility/readline');
 
 const editBlog = async (title) => {
   const currentBlogs = getBlogs();
-  const matchesTitle = (blog) => blog.title === title;
-  const existingBlog = currentBlogs.find(matchesTitle);
+  const isExistingBlog = propertyMatcher('title', title);
+  const existingBlog = currentBlogs.find(isExistingBlog);
 
   if (!existingBlog) {
     console.log(`Blog '${title}' was not found.`);
     process.exit(1);
   }
 
+  const queryNewTitle = () => {
+    const titleAccepter = (newTitle) => {
+      if (currentBlogs.some(propertyMatcher('title', newTitle))) {
+        console.log(`Blog '${newTitle}' already exists.`);
+        return false;
+      }
+      return true;
+    };
+    return persistentReadlineQuestion(
+      'New title (or leave blank): ',
+      titleAccepter,
+    );
+  };
+
+  const queryNewPath = () => {
+    const pathAccepter = (newPath) => {
+      if (currentBlogs.some(propertyMatcher('path', newPath))) {
+        console.log(`A blog with url path '${newPath}' already exists.`);
+        return false;
+      }
+      return true;
+    };
+    return persistentReadlineQuestion(
+      'New url path (or leave blank): ',
+      pathAccepter,
+    );
+  };
+
+  const queryNewSourceFile = () =>
+    readlineQuestion('Source file for your edits (or leave blank): ');
+
   initReadlineInterface();
-  const sourceFile = await persistentReadlineQuestion(
-    'Enter the name of a source file for your edits: ',
-  );
+  const newTitle = await queryNewTitle();
+  const newPath = await queryNewPath();
+  const newSourceFile = await queryNewSourceFile();
   closeReadlineInterface();
 
-  const sourceText = readSourceFile(sourceFile);
+  if (!newTitle && !newPath && !newSourceFile) {
+    process.exit(0);
+  }
+
+  const newSourceText = newSourceFile ? readSourceFile(newSourceFile) : null;
   const editedBlog = {
     ...existingBlog,
-    content: makeContent(sourceText),
+    ...(newTitle && { title: newTitle }),
+    ...(newPath && { path: newPath }),
+    ...(newSourceText && {
+      content: makeContent(newSourceText),
+    }),
     lastEdited: Date.now(),
   };
 
-  writeBlogs([...currentBlogs.filter(negator(matchesTitle)), editedBlog]);
-  addBlogImages(sourceText, title);
-  console.log(`\nBlog '${title}' edited.`);
+  writeBlogs(replaceElements(currentBlogs, isExistingBlog, editedBlog));
+  if (newSourceText) {
+    addBlogImages(newSourceText, title);
+  }
+  console.log(`\nBlog edited.`);
 };
 
 module.exports = { editBlog };

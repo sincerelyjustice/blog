@@ -1,4 +1,5 @@
 const { csvToArray, isEmptyString } = require('js-toolkit/string');
+const { propertyMatcher } = require('js-toolkit/function');
 const {
   readSourceFile,
   writeBlogs,
@@ -21,13 +22,12 @@ const addBlog = async (fileName) => {
     const titleAccepter = (title) => {
       if (isEmptyString(title)) {
         return false;
-      }
-      const blogAlreadyHasTitle = (blog) => blog.title === title;
-      if (currentBlogs.some(blogAlreadyHasTitle)) {
+      } else if (currentBlogs.some(propertyMatcher('title', title))) {
         console.log(`Blog '${title}' already exists.`);
         return false;
+      } else {
+        return true;
       }
-      return true;
     };
     return persistentReadlineQuestion('Enter a title: ', titleAccepter);
   };
@@ -36,13 +36,12 @@ const addBlog = async (fileName) => {
     const pathAccepter = (path) => {
       if (isEmptyString(path)) {
         return false;
-      }
-      const blogAlreadyHasPath = (blog) => blog.path === path;
-      if (currentBlogs.some(blogAlreadyHasPath)) {
+      } else if (currentBlogs.some(propertyMatcher('path', path))) {
         console.log(`A blog with url path '${path}' already exists.`);
         return false;
+      } else {
+        return true;
       }
-      return true;
     };
     return persistentReadlineQuestion('Enter a url path: ', pathAccepter);
   };

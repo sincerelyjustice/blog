@@ -1,10 +1,10 @@
-const { negator } = require('js-toolkit/function');
-const { getBlogs, writeBlogs } = require('./utility/file-system');
+const { negator, propertyMatcher } = require('js-toolkit/function');
+const { writeBlogs, getBlogs } = require('./utility/file-system');
 const { cleanupImages } = require('./utility/images');
 
 const removeBlog = (title) => {
   const blogs = getBlogs();
-  const matchesTitle = (blog) => blog.title === title;
+  const matchesTitle = propertyMatcher('title', title);
   if (blogs.some(matchesTitle)) {
     writeBlogs(blogs.filter(negator(matchesTitle)));
     cleanupImages(title);

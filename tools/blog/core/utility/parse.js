@@ -1,7 +1,7 @@
 const path = require('path');
 const { isEscaped, replaceIfNotEscaped } = require('js-toolkit/string');
 const { forwardSlashes } = require('js-toolkit/file-system');
-const { getDistImagesPath } = require('../config/selectors');
+const { getPublicImagesPath } = require('../config/selectors');
 
 const IMG_LINK_REGEX = /\!\[(.*?)\]\((.*?)\)/g;
 
@@ -14,7 +14,7 @@ const getImageReferences = (sourceText) => {
 
 const setImagePaths = (sourceText) => {
   const replacer = (_, alt, src) => {
-    const imgPath = path.join(getDistImagesPath(), src);
+    const imgPath = path.join(getPublicImagesPath(), src);
     return `![${alt}](/${forwardSlashes(imgPath)})`;
   };
   return replaceIfNotEscaped(sourceText, IMG_LINK_REGEX, replacer);

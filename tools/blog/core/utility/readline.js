@@ -23,7 +23,7 @@ const persistentReadlineQuestion = async (
   accepter = negator(isEmptyString),
 ) => {
   let acceptableAnswer;
-  while (!acceptableAnswer) {
+  while (acceptableAnswer === undefined) {
     const answer = await readlineQuestion(prompt);
     if (accepter(answer)) {
       acceptableAnswer = answer;
