@@ -18,6 +18,9 @@ const helpers = {
   getCustomLinks: ({ className, ...props }) => (
     <a className={gatherClasses(className, styles.link)} {...props} />
   ),
+  getCustomImages: ({ className, ...props }) => (
+    <img className={gatherClasses(className, styles.image)} {...props} />
+  ),
 };
 
 const Markdown = ({ children }) => {
@@ -26,6 +29,7 @@ const Markdown = ({ children }) => {
     getCustomCode,
     getCustomBlockQuote,
     getCustomLinks,
+    getCustomImages,
   } = helpers;
   return (
     <ReactMarkdown
@@ -34,6 +38,7 @@ const Markdown = ({ children }) => {
         code: getCustomCode,
         blockquote: getCustomBlockQuote,
         a: getCustomLinks,
+        img: getCustomImages,
       }}
       remarkPlugins={[remarkGfm]}
     >

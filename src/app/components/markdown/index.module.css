@@ -14,3 +14,7 @@
 .link:hover {
   color: var(--dark-orange);
 }
+
+.image {
+  max-width: 100%; 
+}
