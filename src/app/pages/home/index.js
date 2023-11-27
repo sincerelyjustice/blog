@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { capitalize } from 'js-toolkit/string';
 import { getSelectedValue } from 'js-toolkit/web';
 import { getBlogPath } from '../../../config/theme/selectors';
-import { useBlogsContext } from '../../context/blogs';
+import { useInitialisationContext } from '../../context/initialisation';
 import { getAllTags, sortByRecency } from '../../utility/blogs';
 import styles from './index.module.css';
 
 const HomePage = () => {
-  const { blogs } = useBlogsContext();
+  const { blogs } = useInitialisationContext();
   const [selectedTag, setSelectedTag] = useState(null);
 
   const tags = getAllTags(blogs);

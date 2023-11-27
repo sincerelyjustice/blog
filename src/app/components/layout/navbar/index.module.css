@@ -1,4 +1,5 @@
 @import url('../index.module.css');
+@import url('../../../styles/theme.module.css');
 
 .navBar {
   width: var(--page-width-lg);
@@ -35,7 +36,7 @@
   grid-column: 3;
   justify-self: end;
   align-self: center;
-  color: black;
+  color: var(--orange);
   opacity: 1;
 }
 

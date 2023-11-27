@@ -60,7 +60,10 @@ module.exports = {
       chunkFilename: '[id].css',
     }),
     new CopyWebpackPlugin({
-      patterns: [{ from: path.join(PUBLIC_DIR, 'blogs'), to: 'blogs' }],
+      patterns: [
+        { from: path.join(PUBLIC_DIR, 'blogs'), to: 'blogs' },
+        { from: path.join(PUBLIC_DIR, 'about.txt'), to: 'about.txt' },
+      ],
     }),
   ],
   devServer: {

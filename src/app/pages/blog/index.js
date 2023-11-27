@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useBlogsContext } from '../../context/blogs';
+import { useInitialisationContext } from '../../context/initialisation';
 import {
   getBlogPathParamName,
   getNotFoundPath,
@@ -11,7 +11,7 @@ import styles from './index.module.css';
 
 const BlogPage = () => {
   const { [getBlogPathParamName()]: blogPath } = useParams();
-  const { blogs } = useBlogsContext();
+  const { blogs } = useInitialisationContext();
   const navigate = useNavigate();
 
   const blog = blogs.find((blog) => blog.path === blogPath);

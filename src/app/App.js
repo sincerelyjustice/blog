@@ -1,25 +1,28 @@
 import { Route, Routes } from 'react-router-dom';
 import { addPlaceholderPathParams } from 'js-toolkit/web';
 import {
+  getErrorMessage,
+  getHomePath,
+  getAboutPath,
   getBlogBasePath,
   getBlogPathParamName,
-  getBlogsErrorMessage,
-  getHomePath,
   getLoadingMessage,
 } from '../config/theme/selectors';
-import { useBlogsContext } from './context/blogs';
+import { useInitialisationContext } from './context/initialisation';
 import Layout from './components/layout';
 import HomePage from './pages/home';
 import BlogPage from './pages/blog';
+import AboutPage from './pages/about';
 import NotFoundPage from './pages/not-found';
 
 const App = () => {
-  const { blogs, error, initialised } = useBlogsContext();
+  const { error, initialised } = useInitialisationContext();
 
   return initialised ? (
     <>
-      {error && <p>{getBlogsErrorMessage()}</p>}
-      {blogs && (
+      {error ? (
+        <p>{getErrorMessage()}</p>
+      ) : (
         <Layout>
           <Routes>
             <Route path={getHomePath()} element={<HomePage />} />
@@ -30,6 +33,7 @@ const App = () => {
               )}
               element={<BlogPage />}
             />
+            <Route path={getAboutPath()} element={<AboutPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Layout>

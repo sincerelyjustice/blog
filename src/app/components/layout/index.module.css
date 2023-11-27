@@ -14,10 +14,7 @@
 
 .pageContainer {
   width: var(--page-width-lg);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  min-height: 75vh;
   border: 1px solid var(--dark-white);
   margin-bottom: 5rem;
   overflow: auto;

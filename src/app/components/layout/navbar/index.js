@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
-import { getEmailUrl } from 'js-toolkit/web';
 import {
-  getContactEmail,
+  getAboutPath,
   getHomePath,
   getSiteTitle,
 } from '../../../../config/theme/selectors';
-import EmailIcon from '../../../../assets/icons/email';
+import InformationIcon from '../../../../assets/icons/information';
 import styles from './index.module.css';
 
 const NavBar = () => {
@@ -14,9 +13,9 @@ const NavBar = () => {
       <Link className={styles.homeLink} to={getHomePath()}>
         <h1>{getSiteTitle()}</h1>
       </Link>
-      <a className={styles.iconContainer} href={getEmailUrl(getContactEmail())}>
-        <EmailIcon />
-      </a>
+      <Link className={styles.iconContainer} to={getAboutPath()}>
+        <InformationIcon />
+      </Link>
     </nav>
   );
 };

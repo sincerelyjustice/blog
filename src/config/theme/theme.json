@@ -5,6 +5,9 @@
     "home": {
       "path": "/"
     },
+    "about": {
+      "path": "/about"
+    },
     "blog": {
       "basePath": "/blog",
       "pathParam": "path"
@@ -15,7 +18,7 @@
   },
   "messages": {
     "loading": "Loading...",
-    "blogsError": "Oops. Something went wrong when fetching the blogs.",
+    "error": "Oops. Something went wrong.",
     "404": "Oops. We could not find the resource you were looking for."
   }
 }

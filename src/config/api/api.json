@@ -1,5 +1,8 @@
 {
   "blogs": {
     "endpoint": "/blogs/index.json"
+  },
+  "about": {
+    "endpoint": "/about.txt"
   }
 }
