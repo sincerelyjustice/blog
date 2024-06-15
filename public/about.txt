@@ -1,15 +1,5 @@
-Welcome to my blog. 
+For any questions, feedback, etc., about the blog, **contact** me by email at [sincer3ly.justice@gmail.com](mailto:sincer3ly.justice@gmail.com).
 
-If you have any questions, feedback, and so on, about the blog, or about me, please feel free to **contact me**. This can be done by email at [sincer3ly.justice@gmail.com](mailto:sincer3ly.justice@gmail.com) or also you can dm me on [Twitter](https://twitter.com/sincerelyjustis). 
+The **code** for this blog is on GitHub [here](https://github.com/sincerelyjustice/blog).
 
-If you want to understand the **code** behind this blog, see it on GitHub [here](https://github.com/sincerelyjustice/blog).
-
-Here are some of my **influences**:
-
-- Bronze Age Pervert
-- Nietzsche
-- Elliot Temple
-- Ayn Rand
-- Dr Garrett Smith
-
-Please note that the author of this blog asserts his copyright rights over his content. 
+The author of this blog asserts his copyright rights over his content. 
